@@ -1,0 +1,160 @@
+.role{
+    position: relative;
+    top: 400px;
+    width: 100%;
+  }
+ .titre{
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    width: 100%;
+ }
+  .line{
+     width: 38%;
+    flex: none;
+    border-bottom:5px solid #FFA800;
+    border-radius: 5px;
+  } 
+  .titreR{
+    font-size: 25px;
+    padding: 0 10px;
+    font-weight: bold;
+  }
+  .cardre{
+    width: 100%;
+    height: 474px;
+    position: relative;
+    top: 52px;
+    background: linear-gradient(180deg, #FFA800 40.1%, rgba(255, 168, 0, 0) 100%);
+  }
+ .cercle1{
+    position: absolute;
+    left: -110px;
+    width: 272px;
+    height: 258px;
+    top: 250px;
+    border-radius: 600px;
+    background: #ffff;
+ }
+ .cercle2{
+    position: absolute;
+    left: 280px;
+    width: 48px;
+    height: 48px;
+    top: 10px;
+    border-radius: 600px;
+    background: #ffff;
+ }
+ .cercle3{
+    position: absolute;
+    left: 1022px;
+    width: 48px;
+    height: 48px;
+    top: 10px;
+    border-radius: 600px;
+    background: #ffff;
+ }
+ .cercle4{
+    position: absolute;
+    left: 917px;
+    width: 48px;
+    height: 48px;
+    top: 73px;
+    border-radius: 600px;
+    background: #ffff;
+ }
+ .cercle5{
+    position: absolute;
+    left: 328px;
+    width: 48px;
+    height: 48px;
+    top: 310px;
+    border-radius: 600px;
+    background: #ffff;
+ }
+ .cercle6{
+    position: absolute;
+    left: 735px;
+    width: 48px;
+    height: 48px;
+    top: 350px;
+    border-radius: 600px;
+    background: #ffff;
+ }
+.elme{
+    position: absolute;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding:0 5%;
+}
+.vendeur{
+    position: relative;
+    top: 70px;
+    left: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    text-align: center;
+    width: 20%;
+}
+.acheteur{
+    position: relative;
+    top: 220px;
+    display: flex;
+    width: 20%;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    text-align: center;
+}
+.elme img{
+    width: 30%;
+    border-radius: 5px;
+    margin: auto;
+}
+.elme h1{
+    font-size: 20px;
+}
+  @media screen and (max-width: 1024px) {
+    .line{width: 20%;}
+    .cercle1{
+      left: -20%;
+      width: 45%;
+    }
+    .cercle2{
+      left: 30%;
+      width: 6%;
+      height: 8%;
+    }
+    .cercle3{
+      left: 90%;
+      width: 6%;
+      height: 8%;
+    }
+    .cercle4{
+      left: 70%;
+      width: 6%;
+      height: 8%;
+    }
+    .cercle5{
+      left: 30%;
+      width: 6%;
+      height: 8%;
+    }
+    .cercle6{
+      left: 60%;
+      width: 6%;
+      height: 8%;
+    }
+    .acheteur{
+      font-size: 75%;
+    }
+    .vendeur{
+      font-size: 75%;
+    }
+    .elme img{
+      width: 40%;
+  }
+  }

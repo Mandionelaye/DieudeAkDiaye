@@ -3,7 +3,7 @@ const moduel = require('../models/produit/modulProduit')
 function create(req, res){
     moduel.create(req.body)
     .then((doc)=>{
-        modueluers.findOneAndUpdate({"nom":req.params.nom}, {$push :{produits: doc._id}},{new:true, runValidators:true})
+        modueluers.findOneAndUpdate({"_id":req.params.id}, {$push :{produits: doc._id}},{new:true, runValidators:true})
         .then((doc)=>{
           moduel.updateMany({"_id": doc.produits},{ $push : {users : doc._id, }},{new:true, runValidators:true})
           .then((doc)=>{
@@ -18,18 +18,12 @@ function create(req, res){
 }
 
 function affiche(req, res){
-    moduel.find().populate({path:"users", select :["nom", "prenom"]})
+    moduel.find().populate({path:"users", select :["nom", "prenom", "photo"]})
     .then((doc)=>{
         res.send(doc)
       })
       .catch((err)=>console.error("error c:"+err))
 }
-function modif(req, res){
-
-}
-function supp(req, res){
-
-}
 
 
-module.exports ={createProduit:create, affiProduit:affiche, modifProduit:modif, suppProduit:supp}
+module.exports ={createProduit:create, affiProduit:affiche}

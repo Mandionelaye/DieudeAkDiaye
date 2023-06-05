@@ -6,7 +6,7 @@ class BD{
         return this.connect()
     }
     connect(){
-        mongoss.connect(process.env.DB,{
+        mongoss.connect(process.env.MONGO_URI,{
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
         }).then(()=>{

@@ -10,11 +10,16 @@ const shematUser = mongoose.Schema({
         required:true
     },
     email:{
+            type: String,
+            required: true,
+            unique: true
+    },
+    password:{
         type: String,
         required:true
     },
-    motsDePasse:{
-        type: String,
+    isAdmin:{
+        type: Boolean,
         required:true
     },
     nomEntreprise:String,

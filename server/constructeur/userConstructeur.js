@@ -1,29 +1,66 @@
 const moduel = require('../models/User/modulUser')
 const produits = require('../models/produit/modulProduit')
 const Avatra = require("../photos/FunctionPhoto")
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
 
-const avatar = ''
-function create(req, res){
-    const {nom , prenom, email, motsDePasse,entreprise, categories}=req.body;
-    moduel.create({
+const createToken = (id, nom, isAdmin)=>{
+    return jwt.sign({
+        data:{id, nom, isAdmin}},
+        process.env.JWT_SECRET,{
+            expiresIn:"1d"
+        })
+}
+
+const create=async(req, res)=>{
+    const {nom , prenom, email, password,entreprise, categories, isAdmin}=req.body;
+    const salt =bcrypt.genSaltSync(10);
+    const cryptPassword = bcrypt.hashSync(password, salt);
+    const doc = await moduel.create({
         nom:nom,
         prenom:prenom,
         email:email,
-        motsDePasse:motsDePasse,
+        password:cryptPassword,
         nomEntreprise:entreprise,
         photo:Avatra,
         categories:categories,
+        isAdmin:isAdmin,
         bio:"",
     })
-    .then((doc)=>{
-     res.send(doc)
-     console.log("good");
-    })
-    .catch((err)=>console.error("error c:"+err))
+    const token = createToken(doc._id, doc.nom, doc.isAdmin)
+    return res.status(201).json({
+        message: "User created successfully",
+        token
+     })
 }
 
+const connextion= async(req, res)=>{
+    const {email, password} = req.body;
+     await moduel.findOne({email : email}) 
+     .then((doc)=>{
+        if(!doc){
+            return res.status(401).json({
+                message:`votre Email: ${email} est non Valide`
+            })
+        }
+        const comparePassword = bcrypt.compareSync(password, doc.password);
+        if(!comparePassword){
+            return res.status(401).json({
+                message: "Mot de passe incorrect!"
+            })
+        }
+
+        const token = createToken(doc._id, doc.nom, doc.isAdmin)
+        return res.status(200).json({
+            nom:doc.nom, 
+            token,
+        })
+     })
+}
+ 
 function affiche(req, res){
- moduel.find().populate([
+    const id = req.params.id
+ moduel.findById(id).populate([
     {path:'produits', select:['TypeDeCategorie','description', 'prix']}, 
     {path:"discution", select :["distinataire","message"]}, 
     {path:"panier", select :["ProduitsCommander"]}
@@ -38,7 +75,7 @@ function affiche(req, res){
 function modif(req, res){
     const {nom , prenom, bio, photo,entreprise}=req.body;
     nom?
-    moduel.updateOne({"nom":req.params.nom}, {nom:nom}
+    moduel.updateOne({"_id":req.params.id}, {nom:nom}
     ,{new:true, runValidators:true})
     .then((doc)=>{
         res.send(doc)
@@ -49,7 +86,7 @@ function modif(req, res){
 
     //Prenom
     prenom?
-    moduel.updateOne({"nom":req.params.nom}, {prenom:prenom}
+    moduel.updateOne({"_id":req.params.id}, {prenom:prenom}
     ,{new:true, runValidators:true})
     .then((doc)=>{
         res.send(doc)
@@ -60,7 +97,7 @@ function modif(req, res){
 
     //Bio
     bio?
-    moduel.updateOne({"nom":req.params.nom}, {bio:bio}
+    moduel.updateOne({"_id":req.params.id}, {bio:bio}
     ,{new:true, runValidators:true})
     .then((doc)=>{
         res.send(doc)
@@ -71,7 +108,7 @@ function modif(req, res){
     
     //Photo
     photo?
-    moduel.updateOne({"nom":req.params.nom}, {photo:Avatra(photo)}
+    moduel.updateOne({"_id":req.params.id}, {photo:Avatra(photo)}
     ,{new:true, runValidators:true})
     .then((doc)=>{
         res.send(doc)
@@ -82,7 +119,7 @@ function modif(req, res){
 
      //nomEntreprise
      entreprise?
-     moduel.updateOne({"nom":req.params.nom}, {nomEntreprise:entreprise}
+     moduel.updateOne({"_id":req.params.id}, {nomEntreprise:entreprise}
      ,{new:true, runValidators:true})
      .then((doc)=>{
          res.send(doc)
@@ -92,7 +129,7 @@ function modif(req, res){
      :null
 }
 function suppProduit(req, res){
-    moduel.updateOne({"nom":req.params.nom}, {$pull : {produits : req.body.id}},{new:true, runValidators:true})
+    moduel.updateOne({"_id":req.params.id}, {$pull : {produits : req.body.id}},{new:true, runValidators:true})
     .then((doc)=>{
         produits.findByIdAndRemove(req.body.id)
         .then((doc)=>{console.log(doc);})
@@ -104,4 +141,4 @@ function suppProduit(req, res){
 }
 
 
-module.exports ={createUser:create, afficheUser:affiche, modifUser:modif, suppProduitUser:suppProduit}
+module.exports ={createUser:create, afficheUser:affiche, modifUser:modif, suppProduitUser:suppProduit, conn:connextion}

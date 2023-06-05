@@ -1,0 +1,38 @@
+.containeA{
+background: linear-gradient(180deg, #FFA800 49.48%, rgba(217, 217, 217, 0) 99.99%, rgba(217, 217, 217, 0) 100%);
+border-radius: 55px;
+margin: auto !important;
+height: 80vh;
+max-height: 100%;
+width: 80%;
+text-align: center;
+}
+.containeA p{
+    margin: 5px !important;
+    text-align: center;
+    color: #ffff;
+    font-family: 'Arial';
+    font-style: normal;
+}
+.containeA h2{
+    text-align: center;
+        color: #ffff;
+        font-family: 'Arial';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 240%;
+}
+.inscr{
+    position: relative;
+    color: black;
+    margin-left: -50%;
+    top: -10%;
+}
+.botn{
+    background: #FFA800;
+    border: none;
+}
+.botn:hover{
+    background: #FFFFFF;
+    color: #FFA800;
+}

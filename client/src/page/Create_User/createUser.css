@@ -1,0 +1,32 @@
+.containeC{
+    background: linear-gradient(180deg, #FFA800 49.48%, rgba(217, 217, 217, 0) 99.99%, rgba(217, 217, 217, 0) 100%);
+    border-radius: 55px;
+    margin: auto !important;
+    height: 170vh;
+    max-height: 80%;
+    width: 80%;
+    }
+    .containeC p{
+        margin: 5px !important;
+        text-align: center;
+        color: #ffff;
+    }
+    .containeC h2{
+        text-align: center;
+        color: #ffff;
+        font-family: 'Arial';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 240%;
+    }
+    .botn{
+        background: #FFA800;
+        border: none;
+    }
+    .botn:hover{
+        background: #FFFFFF;
+        color: #FFA800;
+    }
+    form{
+        color: #FFFFFF;
+    }
