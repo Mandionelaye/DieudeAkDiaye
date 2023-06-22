@@ -8,12 +8,8 @@ export default function LogOut() {
 	};
 
 	return (
-		<div className="main-container">
-			<nav className="navbar">
 				<button className="btnLogOut" onClick={handleLogout}>
-					Logout
+					deconnecter
 				</button>
-			</nav>
-		</div>
 	);
 }

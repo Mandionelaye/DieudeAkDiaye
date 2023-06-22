@@ -1,25 +1,35 @@
-const modueluers = require('../models/message/modulDiscussion')
-const moduel = require('../models/message/modulMessage')
-function create(req, res){
-    moduel.create(req.body)
-    .then((doc)=>{
-        modueluers.findOneAndUpdate({"distinataire":req.params.nom}, {$push :{message: doc._id}},{new:true, runValidators:true})
-        .then((doc)=>{
-          moduel.updateMany({"_id": doc.message},{ $push : {discussion : doc._id, }},{new:true, runValidators:true})
-          .then((doc)=>{
-            console.log("good2");
-            res.send(doc)
-        })
-          .catch((err)=>{console.error("error c11:"+err)}) 
-    }) 
-        .catch((err)=>console.error("error c1:"+err))
-    })
-    .catch((err)=>console.error("error c:"+err))
+const moduel = require('../models/message/message')
+const conver = require('../models/Conversation/Conversation');
+
+//add message
+const create = async(req, res)=>{
+     const newMessage = new moduel(req.body);
+     try{
+         newMessage.save()
+        .then(async(doc)=>{
+         conver.findOneAndUpdate({"_id":req.params.id}, {$push :{Messages: doc._id}},{new:true, runValidators:true})
+         .then(async(doc)=>{
+            console.log('cool');
+         })
+         .catch((err)=>{
+            console.log(err);
+         })
+           const messages = await moduel.findById(doc._id).populate({path:"sender", select :["nom", "prenom", "photo"]})
+         res.send(messages)
+     })
+     }catch (err){
+      res.status(500).send(err);
+     }
+}
+//get message
+const affiche = async(req, res)=>{
+      try{
+         const messages = await moduel.find({conversationId : req.params.Id}).populate({path:"sender", select :["nom", "prenom", "photo"]});
+         res.status(200).json(messages);
+      }catch(err){
+         res.status(500).send(err);
+      }
 }
 
-function supp(req, res){
 
-}
-
-
-module.exports ={createMessage:create,suppMessage:supp}
+module.exports ={createMessage:create,afficheMessage:affiche}

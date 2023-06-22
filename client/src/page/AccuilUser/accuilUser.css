@@ -1,86 +1,16 @@
-.navs{
-    background: #FFFFFF;
-    height: 7vh !important;
-    position: fixed;
-    width: 100%;
-    z-index: 2;
-    overflow: hidden;
-}
 .containerU{
     background: #D9D9D9;
+    height: 100vh;
 }
-.icones{
-    position: relative;
-    left: -5%;
-    margin-top: -2%;
-    color: #FFFFFF;
-    display: flex;
-   justify-content: center;
-
-}
-.icone{
-    margin: 5px;
-    color: black;
-}
-.log{
-    margin-top: -0.5%;
-    font-size: 110%;
-font-family: 'Arial';
-font-style: normal;
-font-weight: 900;
-color: #FFA800;
-}
-
-.log samp {
-  font-size: 80%;
-}
-.search{
+.corpsPrin{
     background: #D9D9D9;
-    border-radius: 10px;
-    border: none;
-    position: relative;
-    left: -30%;
-    margin-top: -1.5%;
-}
-.search::placeholder{
-    font-family: 'Arial';
-font-style: normal;
-font-weight: 400;
-font-size: 13px;
-text-align: center;
-/* identical to box height */
-}
-.divInput{
-    position: relative;
-    left: -10%;
-    margin-top: -1.5%;
-}
-.bttn{
-    background-color: #D9D9D9;
-    width: 15%;
-    height: 26px;
-    border-radius: 10px;
-    margin-left: -20%;
-    margin-top: -2%;
-    padding: 0;
-}
-.profil{
-    position: relative;
-    width: 5%;
-    margin-top: -2%;
-    padding: 0;
-}
-
-.imgProfil{
-    position: relative;
-    width: 60%;
-    border-radius: 5px;
 }
 /* contenue */
 .conte{
-    padding-top: 50px;
+    padding-top: 80px;
     display: flex;
     justify-content: space-evenly;
+   
 }
 .Param{
     position: fixed;
@@ -91,15 +21,21 @@ text-align: center;
 
 .Produits{
     position: relative;
-    left: 25%;
+    left: 20%;
+    padding: 0;
+}
+.showProduit{
+    position: relative;
+    left: 20%;
     padding: 0;
 }
 .imgProfi{
     width: 40px;
-    border-radius: 5px;
+    height: 40px;
+    border-radius: 100px;
 }
 .Ecrire{
-    width: 240px;
+    width: 370px;
     background: #D9D9D9;
     border: none;
     border-radius: 10px;
@@ -110,7 +46,7 @@ text-align: center;
     margin-bottom: 10px;
 }
 .ajout{
-    width: 350px;
+    width: 570px;
     background: #FFFFFF;
     padding: 10px;
 /* effeit */
@@ -156,11 +92,22 @@ border-radius: 10px;
     margin-top: 5px;
 }
 .Param{
-    width: 256px;
-height: 90vh;
-    background: #FFFFFF;
-border-radius: 20px; 
-filter: drop-shadow(7px 10px 4px rgba(0, 0, 0, 0.25));
+    width: 400px;
+    height: 85vh;
+    background:#FFFFFF;
+    border-radius: 20px; 
+   filter: drop-shadow(7px 10px 4px rgba(0, 0, 0, 0.25));
+}
+.showMesserger{
+    position: fixed;
+    left: 15%;
+    z-index: 1;
+    overflow: hidden;
+    width: 400px;
+    height: 85vh;
+    background:#FFFFFF;
+    border-radius: 20px; 
+   filter: drop-shadow(7px 10px 4px rgba(0, 0, 0, 0.25));
 }
 .profil p{
    padding: 0 10px;
@@ -168,17 +115,20 @@ filter: drop-shadow(7px 10px 4px rgba(0, 0, 0, 0.25));
 font-style: normal;
 font-weight: 400;
 }
+.profil{
+    margin-bottom: 5px;
+}
 .entreP{
     padding: 5px;
 }
 
 .categorys{
-    line-height: 2px;
+    line-height: 8%;
     padding-left: 10px;
 }
 .ligneCate{
     border-top: 2px solid #FFA800;
-    width: 90%;
+    width: 70%;
     height: 2px;
     margin: auto;
 }
@@ -186,36 +136,92 @@ font-weight: 400;
     color: #FFA800;
 }
 
+.liste{
+    font-size: 20px;
+    line-height: 19px;
+}
+.categ{
+    margin: 10px;
+    color: #FFA800;
+}
+.cp{
+    cursor: pointer;
+}
+.bt, .dispar{
+    display: none;
+}
+@media screen and (max-width: 1004px) {
+    .cont{
+        padding-top: 60px;
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        justify-content: center;
+    }
+    .bt{
+        display: inline;
+        margin-top: -2%;
+    }
+    .btnex{
+        margin-left: 15px;
+    }
+    .showMesserger{
+        left: 11%;
+        margin: auto;
+        width: 80%;
+        flex: auto;
+    }
+    .princ{
+    display: flex;
+    width: 620px;
+    position: relative;
+   justify-content: center;
+   margin-left: 5%;
+   padding:0;
 
-
-@media screen and (max-width: 1024px) {
-    .search{
+    }
+    .profil, .ce, .ling{
         display: none;
     }
-    .bttn{
-        background: none;
-        padding: 0;
+    .catacuil{
+        display: flex;
+        width: 100%;
+        margin: 0;
+        
     }
-    .profil{
-        width:30px;
-        position: relative;
-        margin-top: -5%;
-    }
-    .divInput{
-        margin-top: -5%;
-    }
-    .imgProfil{
-        width: 90%;
+    .cp{
+        display: flex;
+        width: 130px;
+        font-size: 20px;
+        line-height: 23px;
+        margin-left: 20px;
+        font-size: 15px;
     }
     .icones{
         margin-top: -5%;
     }
     .Param{
+        left: 1%;
+        top: 0;
+       height: 10vh;
+       width: 82%;
+       display: flex;
+       position: relative;
+       margin-bottom: 20px;
+       overflow-x: scroll;
+       z-index: 2;
+       scroll-behavior: smooth;
+       justify-content:space-between;
+    }
+    .Param::-webkit-scrollbar{
         display: none;
     }
     .Produits{
         position: relative;
-        left: 3%;
+        left: 0%;
         margin: auto !important;
+    }
+    .showProduit{
+        display: none;
     }
 }

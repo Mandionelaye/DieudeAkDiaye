@@ -3,7 +3,7 @@ const moduel = require('../models/Panier/panier')
 function create(req, res){
     moduel.create(req.body)
     .then((doc)=>{
-        modueluers.findOneAndUpdate({"nom":doc.user}, {$push :{panier: doc._id}},{new:true, runValidators:true})
+        modueluers.findOneAndUpdate({"_id":req.params.id}, {$push :{panier: doc._id}},{new:true, runValidators:true})
         .then((doc)=>{
           moduel.updateMany({"_id": doc.panier},{ $push : {users : doc._id, }},{new:true, runValidators:true})
           .then((doc)=>{
@@ -18,7 +18,9 @@ function create(req, res){
 }
 
 function affiche(req, res){
-    moduel.find().populate({path:"ProduitsCommander", select :["description", "prix"]})
+    moduel.findById(req.params.id).populate([
+      {path:"ProduitsCommander", select :['photoProduit','description', 'prix']},
+      {path:"users", select :["nom", "prenom", "photo"]}])
     .then((doc)=>{
         res.send(doc)
       })
@@ -26,7 +28,7 @@ function affiche(req, res){
 }
 
 function addProduit(req, res){
-    moduel.findOneAndUpdate({"user":req.params.nom}, {$push : {ProduitsCommander : req.body.id}},{new:true, runValidators:true})
+    moduel.findOneAndUpdate({"_id":req.params.id}, {$push : {ProduitsCommander : req.body.id}},{new:true, runValidators:true})
     .then((doc)=>{
         res.send(doc)
         console.log("modiff");
@@ -35,12 +37,20 @@ function addProduit(req, res){
 }
 
 function suppProduit(req, res){
-    moduel.updateOne({"user":req.params.nom}, {$pull : {ProduitsCommander : req.body.id}},{new:true, runValidators:true})
+    moduel.updateOne({"_id":req.params.id}, {$pull : {ProduitsCommander : req.body.id}},{new:true, runValidators:true})
     .then((doc)=>{
-        res.send(doc)
+        res.status(201).json({
+          message: true,
+        })
         console.log("supp");
       })
       .catch((err)=>console.error("error c:"+err))
 }
-
-module.exports ={createPanier:create , affichPanier:affiche, addProduit:addProduit, suppProduit:suppProduit}
+function afficheNormal(req, res){
+  moduel.findById(req.params.id)
+  .then((doc)=>{
+      res.send(doc)
+    })
+    .catch((err)=>console.error("error c:"+err))
+}
+module.exports ={createPanier:create , affichPanier:affiche, addProduit:addProduit, suppProduit:suppProduit, afficheNormal:afficheNormal}

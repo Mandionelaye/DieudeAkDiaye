@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import './autantification.css'
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
-export default function Autantification({user}) {
+export default function Autantification() {
+    const {idp,categorie} = useParams();
     const [error, setError]= useState(null)
     const [email, setEmail]= useState("");
     const [password, setPassword]= useState("");
@@ -35,7 +36,7 @@ export default function Autantification({user}) {
           localStorage.setItem('token', res.data.token)
               setEmail('')
               setPassword('')
-              window.location = "/2D/"+res.data.nom
+              window.location = categorie?`/2D/filter/${res.data.id}/${categorie}`:`/2D/${res.data.id}/${idp?idp:""}`
         })
       }catch(err){
           if(
@@ -65,7 +66,10 @@ export default function Autantification({user}) {
         }
       <input type="submit" value="connecter" className='botn btn  btn-primary' />
         </form>
-       <Link to={"/inscrition"} className='inscr'>ceer un compte</Link>
+        <div className='inscr'>
+       <Link to={"/inscrition"} className='text-black' >ceer un compte</Link>
+       <Link to={"/"} className=' p-4 text-black'>accuil</Link>
+       </div>
         </div>   
     </div>
   )

@@ -1,12 +1,17 @@
 .btnLogOut {
 	border: none;
 	outline: none;
-	padding: 12px 0;
-	background-color: rgb(255, 0, 0);
+	padding: 10px 0;
+	background-color: #FFA800;
 	color: white;
-	border-radius: 20px;
+	border-radius: 10px;
 	width: 120px;
 	font-weight: bold;
 	font-size: 14px;
 	cursor: pointer;
+}
+.btnLogOut:hover{
+    border: 1px solid #FFA800;
+	background: transparent;
+    color: #FFA800;
 }

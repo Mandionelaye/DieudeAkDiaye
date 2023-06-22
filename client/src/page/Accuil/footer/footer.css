@@ -1,4 +1,4 @@
-.footer{
+.footerP{
     position: relative;
     width: 100%;
     height: 36px;
@@ -6,10 +6,10 @@
     top: 692px;
     z-index: 2;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     background: #000000;
 }
-.footer p{
+.footerP p{
     font-family: 'Arial';
 font-style: normal;
 font-weight: 900;

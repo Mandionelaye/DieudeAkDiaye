@@ -1,67 +1,92 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import jwt from 'jwt-decode'
+import { Link, useParams } from 'react-router-dom';
 //import LogOut from '../../composent/deconnection/logOut';
 import './accuilUser.css'
 import Produits from './listeProduits/Produits';
+import Addprdt from './addProduit/Addprdt';
+import Header from './navUser/Header';
+import Messenger from '../messenger/messenger';
 export default function AccuilUser() {
-  const user = localStorage.getItem("token");
-    const idUser = jwt(user)
+  const param = useParams();
    const [dataUser, setDataUser] = useState(null)
+   const [show, setShow] = useState(false)
+   const [idcomversation, setIdcomversation] = useState('');
+   const [senderId, setSenderId] = useState(null)
+   const [filtreCa, setFilterCa] = useState('');
    const categorys =[
     {
       id:1,
+      name:"Boutique Officielles",
+       icone:"fa-solid fa-shop",
+       file:""
+    },
+    {
+      id:2,
       name: "Jeux videos & Consoles",
-      icone:"fa-solid fa-gamepad"
+      icone:"fa-solid fa-gamepad",
+      file:"jeux videos & consoles"
   },
     {
       id:2,
-      name:"Boutique Officielles",
-       icone:"fa-solid fa-shop"
+      name:"Animaux",
+       icone:"fa-solid fa-dove",
+       file:"animaux"
     },
     {
       id:3,
-      name:'Telephones & Tablettes',
-       icone:"fa-solid fa-mobile-screen"
+      name:'Electronique',
+       icone:"fa-solid fa-mobile-screen",
+       file:"electronique"
     },
     {
       id:4,
       name:'Electromenager',
-       icone:"fa-solid fa-blender-phone"
+       icone:"fa-solid fa-blender-phone",
+       file:"electromenager"
     },
     {
       id:5,
       name:'Sante & Beaute',
-       icone:"fa-solid fa-heart-pulse"
+       icone:"fa-solid fa-heart-pulse",
+       file:"sante & beaute"
     },
     {
       id:6,
-      name:'Informatique',
-       icone:"fa-solid fa-laptop"
+      name:'Alimentation Générale',
+       icone:"fa-solid fa-pizza-slice",
+       file:"alimentation générale"
     },
     {
       id:7,
       name:'Mode',
-       icone:"fa-solid fa-shirt"
+       icone:"fa-solid fa-shirt",
+       file:"mode"
     },
     {
       id:8,
       name:'Articles de Sport',
-       icone:"fa-solid fa-dumbbell"
+       icone:"fa-solid fa-dumbbell",
+       file:"sport"
     },
     {
       id:9,
-      name:'Autres Categories',
-      icone:"fa-solid fa-ellipsis-vertical"
+      name:'Pour Enfant',
+      icone:"fa-sharp fa-solid fa-baby",
+      file:"pour enfant"
+    },
+    {
+      id:10,
+      name:'vehicule',
+      icone:"fa-sharp fa-solid fa-baby",
+      file:"vehicule"
     }
  ]
     useEffect(()=>{
         const data= async ()=>{
             try{
-       await axios.get("http://localhost:8000/users/"+idUser.data.id)
+       await axios.get("http://localhost:8000/users/"+param.id)
      .then((doc)=>{
-        console.log(doc);
       setDataUser(doc.data)
      })
     }catch(err){
@@ -69,57 +94,91 @@ export default function AccuilUser() {
      }
     }
      data();
-    },[dataUser, idUser])
-
+    },[param])
+    
+    useEffect(()=>{
+      const deletemsg = async ()=>{
+        try{
+        const idmessgas = idcomversation.Messages?.filter((m)=> m.sender[0] !== param.id);
+        idmessgas?.forEach((m)=>(
+       axios.put('http://localhost:8000/litMessage/'+ idcomversation._id, {id: m._id})
+        ))
+      } catch(err){
+        console.log(err);
+   }
+    }
+  
+      idcomversation && deletemsg();
+    },[idcomversation, param])
+    function showAdd(elm){
+          setShow(elm)
+    }
+    const carosel1 =useRef(null);
+    const back=(e)=>{
+      e.preventDefault();
+      carosel1.current.scrollLeft+=240;
+    }
+    const next= (e)=>{
+      e.preventDefault();
+      carosel1.current.scrollLeft-=240;
+    }
   return (
+    <>{dataUser?(
         <div className='containerU'>
-           <nav className="navs navbar navbar-light">
-            <div className="container w-100">
-              <p className='log'>2D <samp> Dieude ak Diaye</samp></p>
-              <div className='icones d-flex'>
-               <Link className="icone"><i class="fa-solid fa-house-user"></i></Link>
-               <Link className="icone"><i class="fa-solid fa-cart-shopping"></i></Link>
-               <Link className="icone"><i class="fa-solid fa-message"></i></Link>
-             </div>
-             <div className='divInput'>
-                <input type="search" className='search' placeholder='Recherche produit'/> 
-                <button className='bttn btn'><i class="fa-solid fa-magnifying-glass"></i></button>
-              </div>   
-              <div className='profil'>
-                <img src={dataUser?dataUser.photo:null} alt="Prfl" className='imgProfil' />
-              </div>
-            </div>
-          </nav>
-          <div className="container conte">
-             <div className='Param'>
+          {show?
+          <Addprdt show={showAdd} id={dataUser?dataUser._id:null} imagePrfl={dataUser?dataUser.photo:null} prenom={dataUser?dataUser.prenom:null} nom={dataUser?dataUser.nom:null}/>
+          :null  
+        }
+          <Header idcomversation={idcomversation}/>
+          <div className='corpsPrin'>
+          <div className={`container conte ${!param.ex?"cont":" "}`}>
+          <div className='princ'>
+          <button type="button" className={`${param.ex?"dispar":"btne bt"}`} onClick={next}>
+                  <i className="fa-solid fa-less-than"></i>
+             </button>
+             <div className={param.ex?"showMesserger":"Param" } ref={carosel1}>
+              {
+                param.ex?<Messenger command={senderId} setIdcomversation={setIdcomversation}/>
+                :
+                <>
               <div className="profil">
                <div className="name">
-               <img src={dataUser?dataUser.photo:null} className='imgProfi' alt="prfl" />
+               <Link to={`/2D/profil/${param.id}/${param.id}`}><img src={dataUser?dataUser.photo:null} className='imgProfi' alt="prfl" /></Link>
                <p>{dataUser?dataUser.prenom:null} {dataUser?dataUser.nom:null}</p>
                </div>
                <p className='entreP'><span><i class="fa-solid fa-city"></i></span> {dataUser?dataUser.nomEntreprise:"Nom entreprise"}</p>
                </div>
                <div className="categorys">
-                <div className='ligneCate'></div>
-                <h5>Categories</h5>
-                  <ul className='category'>
+                <div className='ligneCate ling'></div>
+                <h5 className='categ ce'>Categories</h5>
+                  <ul className='category catacuil'>
                   {
                     categorys.map((category)=>(
-                      <li key={category.id} className='liste'><i className={category.icone}></i>{category.name}</li>
-                    ))
+                      <li key={category.id} className='liste cp'  onClick={()=>setFilterCa(category.file)}>
+                        <i className={category.icone} ></i>
+                      {category.name}
+                      </li>
+                      ))
                   }
                 </ul>
+               
                </div>
+               </>
+                    }
              </div>
-             <div className='Produits'>
+             <button type="button" className={`${param.ex?"dispar":"btne bt btnex"}`} onClick={back}>
+                  <i className="fa-solid fa-greater-than"></i>
+             </button>
+            </div>
+             <div className={param.ex?"showProduit":"Produits"}>
              <div className='ajout'>
-              <div className="form">
-                <img src={dataUser?dataUser.photo:null} className='imgProfi' alt="prfl" />
-                <input type="text" className='Ecrire' placeholder='ecrire...' />
+              <div className="form d-flex">
+              <Link to={`/2D/profil/${param.id}/${param.id}`}><img src={dataUser?dataUser.photo:null} className='imgProfi' alt="prfl" /></Link>
+              <p className=' pt-1 ps-2'>{dataUser?dataUser.prenom:null} {dataUser?dataUser.nom:null}</p>
               </div>
               <div className='button'>
                    <div className='itme1 im'>
-                      <button className='btnt'> Ajouter<samp className='btn-ajout'><i className="fa-solid fa-plus"></i></samp></button>
+                      <button className='btnt' onClick={()=>{setShow(true)}}> Ajouter<samp className='btn-ajout'><i className="fa-solid fa-plus"></i></samp></button>
                    </div>
                    <div className="span"></div>
                    <div className='itme1'>
@@ -127,9 +186,14 @@ export default function AccuilUser() {
                    </div>
               </div>
               </div>
-              <Produits categorys={dataUser?dataUser.categories:null}/>
+              <Produits senderId={setSenderId} filtreCa={filtreCa}/>
              </div>
           </div>
+          </div>
         </div>
+        ):
+        <div className='loading'><i class="fa-solid fa-spinner fa-spin-pulse"></i></div>
+      }
+        </>
   )
 }

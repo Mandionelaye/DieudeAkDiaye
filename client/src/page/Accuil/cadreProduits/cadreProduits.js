@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import './cadreProduits.css'
-export default function CadreProduits() {
+export default function CadreProduits({id}) {
     const [produits, setProduit]= useState([])
     useEffect(()=>{
         const DB= async()=>{
@@ -13,36 +13,6 @@ export default function CadreProduits() {
     }
     DB()
     })
-    const listeproduits =[ {
-      id:1,
-      description:'une motre de luxe',
-      img:"/image/motre.jpg",
-      prix:15000
-    },
-    {
-      id:2,
-      description:"Air-force Noir",
-       img:"/image/airforce_.jpg",
-       prix:10000
-    },
-    {
-      id:3,
-      description:'Ipad pro 4',
-       img:"/image/tablette.webp",
-       prix:200000
-    },
-    {
-      id:4,
-      description:'Lunette de vue de loin',
-       img:"/image/lunette.jpg",
-       prix:10000
-    },
-    {
-      id:5,
-      description:'casque bluetooth',
-       img:"/image/casque.jpg",
-       prix:7000
-    }]
     const types =[
     { tab :produits.filter((p)=> p.TypeDeCategorie==="sport"),
       name: "sport"},
@@ -55,50 +25,50 @@ export default function CadreProduits() {
     { tab : produits.filter((p)=> p.TypeDeCategorie==="sante & beaute"),
       name: "sante & beaute"},
     { tab : produits.filter((p)=> p.TypeDeCategorie==="electronique"),
-      name: "electronique"}
+      name: "electronique"},
+     { tab : produits.filter((p)=> p.TypeDeCategorie==="jeux videos & consoles"),
+      name: "jeux videos & consoles"},
+      { tab : produits.filter((p)=> p.TypeDeCategorie==="animaux"),
+      name: "animaux"},
+      { tab : produits.filter((p)=> p.TypeDeCategorie==="alimentation générale"),
+      name: "alimentation générale"},
+      { tab : produits.filter((p)=> p.TypeDeCategorie==="vehicule"),
+      name: "vehicule"},
     ]
+
+    const lookProduit =(idProduit)=>{
+      window.location = `${id?`/2D/${id}/`+idProduit:"/connecter/"+idProduit}`
+    }
   return (
     <>
       <div className='cadreP'>
        <div className='row m'>
+        {produits.length?(
 
-      {
-        types.map((type)=>(
-          <div className={'sport col-4'} key={type.name}>
-                <h1 className='titre'>{type.name}</h1>
-                <div className='prod'>
-       {
-        type.tab.slice(-3).map((produit)=>(
-            <div className="elmPr" key={produit._id}>
-                <div className="item">
-                    <img className='imgP' src={produit.photoProduit} alt=""/>
+            types.map((type)=>(
+              <div className={'sport'} key={type.name}>
+              <h1 className='titre'>{type.name}</h1>
+              <div className= 'row prod'>
+              {
+                type.tab.map((produit)=>(
+                  <div className="itmp col-2" key={produit._id} onClick={()=>{lookProduit(produit._id)}}>
+                <div className="elmep">
+                    <img className='imgPr' src={produit.photoProduit} alt=""/>
+                    <div className='text'>
+                    <h3 className='desc'>{produit.description}</h3>
                     <p>{produit.prix} F</p>
+                    </div>
                 </div>
             </div>
-        ))
-       }
-       </div>
-          </div>
         ))
       }
       </div>
       </div>
-      <div className="containep">
-        <div className="mer row">
-       {
-        listeproduits.map((produit)=>(
-          <div className="itmp col-2" key={produit.id}>
-              <div className="elmep">
-               <img src={produit.img} className='imgPr' alt="img" />
-               <div className='text'>
-               <h3 className='desc'>{produit.description}</h3>
-               <p>{produit.prix} F</p>
-               </div>
-               </div>
-          </div>
-        ))
-       }
-        </div>
+      ))
+    ):
+    <div className='loading'><i class="fa-solid fa-spinner fa-spin-pulse"></i></div>
+  }
+    </div>
       </div>
     </>
   )

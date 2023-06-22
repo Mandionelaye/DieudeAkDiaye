@@ -1,5 +1,5 @@
 .eleme{
-    width: 350px;
+    width: 570px;
     background: #FFFFFF;
 /* effeit */
 
@@ -11,6 +11,7 @@ margin-bottom: 5px;
 .user{
     display: flex;
     padding: 10px;
+    cursor: pointer;
 }
 .user p{
     padding-top: 5px;

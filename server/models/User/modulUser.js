@@ -23,6 +23,8 @@ const shematUser = mongoose.Schema({
         required:true
     },
     nomEntreprise:String,
+    tel:Number,
+    lieu:String,
     photo:String,
     categories:[{
         type: String,
@@ -30,7 +32,7 @@ const shematUser = mongoose.Schema({
     }],
     bio:String,
     produits:[{type: mongoose.Types.ObjectId, ref:"produit"}],
-    discution:[{type: mongoose.Types.ObjectId, ref:"discussion"}],
+    discution:[{type: mongoose.Types.ObjectId, ref:"Conversation"}],
     panier:[{type: mongoose.Types.ObjectId, ref:"panier"}]
 })
 

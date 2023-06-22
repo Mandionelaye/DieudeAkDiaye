@@ -1,0 +1,19 @@
+
+#notifiction{
+   position: fixed;
+   color: #fff;
+   background: #FFA800;
+   border-radius: 5px;
+   padding: 1.2rem;
+   box-shadow: 3px 6px 12px #00000066;
+   transition: all .4s;
+   left: 63%;
+}
+@media screen and (max-width:1024px) {
+   .wid{
+      width: 215% !important;
+   }
+   .produitsProfil{
+      position: relative;
+   }
+}

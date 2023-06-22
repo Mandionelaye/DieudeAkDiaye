@@ -1,0 +1,45 @@
+.listeSeacher{
+    padding: 0%;
+    list-style: none;
+    text-align: center;
+    width: 500px;
+    margin: auto;
+}
+
+.itemListe{
+    text-decoration: none;
+    padding: 5px;
+    margin: 10px 0;
+    font-size: 25px;
+    color: #444;
+    font-weight: 300;
+    display: flex;
+    justify-items: center;
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: 10px 7px 4px rgba(0, 0, 0, 0.25);
+    transition: all .4s;
+}
+
+.itemListe:hover{
+    color: black;
+}
+
+.imgListe{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.listep{
+    margin-top:10px ;
+    margin-left: 10px;
+}
+
+
+.logsearch{
+    margin-top: 15%;
+    font-size: 30px;
+    text-align: center;
+    color: #fff;
+}

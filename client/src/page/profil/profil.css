@@ -1,0 +1,113 @@
+
+.profilUser{
+    background: #D9D9D9;
+}
+.p-profil{
+    padding-top: 30px;
+}
+.loading{
+    margin: auto;
+    text-align: center;
+    padding-top: 20%;
+    font-size: 50px;
+    color: #FFA800;
+}
+.blockPrp{
+    padding-top: 100px !important;
+    z-index: 2;
+    background: #D9D9D9;
+    margin-bottom: 50px;
+}
+.blockProfil{
+    background: #FFFFFF;
+    margin-top: -20px;
+/* effeit */
+box-shadow: 7px 10px 4px rgba(0, 0, 0, 0.25);
+border-radius: 10px;
+width: 100%;
+padding: 15px;
+display: flex;
+}
+.sousblock{
+    display: flex;
+    position: relative;
+    width: 50%;
+}
+.imgPrfl{
+    position: absolute;
+ border-radius: 100px;
+width: 120px;
+height: 120px;
+top: -60px;
+}
+.textProfil{
+    margin-left: 130px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.fullname{
+    font-family: 'Arial';
+font-style: normal;
+font-weight: 700;
+font-size: 25px;
+line-height: 29px;
+}
+.bio{
+    font-family: 'Arial';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 29px;
+/* identical to box height */
+
+
+color: rgba(0, 0, 0, 0.7);
+}
+.blockbtn{
+    width: 50%;
+    text-align: center;
+    padding-top:10px ;
+    display: flex;
+}
+.btn-modifp{
+    background: #FFA800;
+    border: none;
+    width: 192px;
+    height: 38px;
+    color: white;
+    font-weight: bold;
+}
+.itmbtn{
+ width: 100%;
+}
+.btn-modifp:hover{
+    border: 1px solid #FFA800;
+    color: #FFA800;
+}
+
+/* sous partie  */
+
+.sousAccuil{
+    display: flex;
+    padding-top: 20px;
+}
+
+
+.produitsProfil{
+    width: 50%;
+    padding: 10px;
+}
+
+.offPrdt{
+    text-align: center;
+    padding-top:100px ;
+    font-size: 40px;
+    color: #b3aeae;
+}
+
+@media screen and (max-width:1024px) {
+    .sousAccuil{
+        flex-direction: column;
+    }
+}

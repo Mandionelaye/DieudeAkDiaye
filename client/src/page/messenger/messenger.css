@@ -1,0 +1,131 @@
+.messenger{
+    height: calc(100vh - 100px);
+}
+.barremessenger{
+    padding: 10px;
+    background: #FFA800;
+}
+.chatMenu{
+    flex: 3.5;
+}
+.chatMenuInput{
+   width:90%;
+   padding: 10px 3px;
+   border: none;
+   border-bottom: 1px solid gray;
+   background-color: #EFE7D8;
+   outline: none;
+}
+.chatBox{
+    flex: 5.5;
+}
+.chatBoxWrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    background: #EFE7D8;
+}
+
+.chatBoxTop{
+    height: 67vh;
+    overflow-y: scroll;
+    padding-right: 10px;
+}
+.containerConversation{
+    height: 65vh;
+    overflow-y: scroll;
+    padding-right: 10px;
+}
+.containerConversation::-webkit-scrollbar-track{
+    background-color: #EFE7D8;
+} 
+.containerConversation::-webkit-scrollbar-thumb{
+    background-color: #FDBB3A;
+    border-radius: 15px;
+ }
+ .containerConversation::-webkit-scrollbar {
+    width: 15px;
+  }
+
+  .chatBoxTop::-webkit-scrollbar-track{
+    background-color: #EFE7D8;
+} 
+.chatBoxTop::-webkit-scrollbar-thumb{
+    background-color: #FDBB3A;
+    border-radius: 15px;
+ }
+ .chatBoxTop::-webkit-scrollbar {
+    width: 15px;
+  }
+.chatBoxBottom{
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+  justify-content: space-between;
+}
+.ChatMessageInput{
+    width: 80%;
+    height: 50px;
+    padding: 10px;
+    border-radius: 10px;
+}
+.chatSubmitButton{
+    width: 70px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #FDBB3A;
+    color: white;
+}
+.chatOnline{
+    flex: 3;
+}
+.chatMenuWrapper,.chatBoxWrapper,.chatOnlineWrapper{
+    padding: 10px;
+    height: 100%;
+}
+
+.chatMenuWrapper{
+    background: #EFE7D8;
+    height: 75.6vh;
+}
+
+.noConversationText{
+    position: absolute;
+    top: 10%;
+    font-size: 50px;
+    color: rgb(224, 220, 220);
+    cursor: default;
+}
+.petitMenu{
+    display: flex;
+    background: #FFA800;
+    padding: 10px;
+}
+.profilMesseger{
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 10px;    
+}
+.chatImg{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #FFA800;
+}
+.chatImgContainer{
+    position: relative;
+    margin-right: 10px;
+}
+.titreMessenger{
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: bolder;
+    font-size: 20px;
+    padding: 5px;
+}

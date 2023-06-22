@@ -54,56 +54,66 @@ export default function CreateUser() {
         },
     ]
     const categorys =[
-        {
-            id:1,
-            name: "",
-            icone:"fa-solid fa-gamepad"
-        },
-        {
-          id:2,
-          name: "Jeux videos & Consoles",
+      {
+          id:1,
+          name: "categories",
           icone:"fa-solid fa-gamepad"
       },
-        {
-          id:3,
-          name:"Boutique Officielles",
-           icone:"fa-solid fa-shop"
-        },
-        {
-          id:4,
-          name:'Telephones & Tablettes',
-           icone:"fa-solid fa-mobile-screen"
-        },
-        {
-          id:5,
-          name:'Electromenager',
-           icone:"fa-solid fa-blender-phone"
-        },
-        {
-          id:6,
-          name:'Sante & Beaute',
-           icone:"fa-solid fa-heart-pulse"
-        },
-        {
-          id:7,
-          name:'Informatique',
-           icone:"fa-solid fa-laptop"
-        },
-        {
-          id:8,
-          name:'Mode',
-           icone:"fa-solid fa-shirt"
-        },
-        {
-          id:9,
-          name:'Articles de Sport',
-           icone:"fa-solid fa-dumbbell"
-        },
-     ]
+      {
+        id:2,
+        name: "jeux videos & consoles",
+        icone:"fa-solid fa-gamepad"
+    },
+      {
+        id:3,
+        name:"animaux",
+         icone:"fa-solid fa-shop"
+      },
+      {
+        id:4,
+        name:'electronique',
+         icone:"fa-solid fa-mobile-screen"
+      },
+      {
+        id:5,
+        name:'electromenager',
+         icone:"fa-solid fa-blender-phone"
+      },
+      {
+        id:6,
+        name:'sante & beaute',
+         icone:"fa-solid fa-heart-pulse"
+      },
+      {
+        id:7,
+        name:'alimentation générale',
+         icone:"fa-solid fa-laptop"
+      },
+      {
+        id:8,
+        name:'mode',
+         icone:"fa-solid fa-shirt"
+      },
+      {
+        id:9,
+        name:'sport',
+         icone:"fa-solid fa-dumbbell"
+      },
+      {
+        id:10,
+        name:'pour enfant',
+         icone:"fa-solid fa-dumbbell"
+      },
+   ]
     function envoi(e){
         e.preventDefault();
         axios.post('http://localhost:8000/user',{nom:nom, prenom:prenom, email:email, password:password, isAdmin:isAdmin, categories:categories})
         .then((res)=>{
+             if(res.data.adamin===false){
+               axios.post('http://localhost:8000/panier/'+res.data.id)
+               .catch((err)=>{console.log(err);})
+             }
+             localStorage.setItem('token', res.data.token)
               setReponse(res.data);
               setNom('');
               setPrenom('');
@@ -112,6 +122,7 @@ export default function CreateUser() {
               setIsAdmin('');
               setCategories([]);
               setError(true)
+              window.location = "/2D/"+res.data.id
         })
         .catch((err)=>{
             console.log(err);
@@ -123,7 +134,7 @@ console.log(categories);
     <div className=' containeC'>
       <h2>2D</h2>
       <p>Diaye ak Dieude</p>
-        {error?reponse?<h3 className='text-center text-success'>reponse.message</h3>:<h3 className='text-center text-danger'>error de creartion veiller resssayer</h3>:null}
+        {error?reponse?<h3 className='text-center text-success'>{reponse.message}</h3>:<h3 className='text-center text-danger'>error de creartion veiller resssayer</h3>:null}
      <form  onSubmit={envoi} className='w-50 m-auto pt-5 pb-5' >
       {
         inputs.map((input)=>(

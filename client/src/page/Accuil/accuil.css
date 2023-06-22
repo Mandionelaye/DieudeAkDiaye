@@ -1,7 +1,6 @@
 .containers{
     width: 100%;
     max-width: 100%;
-    height: 3143px;
     padding: 0;
     margin: 0;
 }
@@ -101,6 +100,7 @@ color: #FFFFFF;
     width: 737px;
     color: #ffffff;
     text-align: center;
+    outline: none;
 }
 .inputeR::placeholder{
     color: #FFFFFF;
@@ -218,7 +218,7 @@ li i{
 
   .slidep{
         display: flex;
-        overflow-x: auto;
+        overflow-x: scroll;
         scroll-behavior: smooth;
         z-index: 2;
   }
@@ -264,9 +264,12 @@ li i{
   }
   .slidep2{
     display: flex;
-    overflow: scroll;
+    overflow-x: scroll;
     scroll-behavior: smooth;
     z-index: 2;
+}
+.categorieProd{
+  text-decoration: none;
 }
   .ensemble-fleche2{
     width: 92%;
@@ -277,7 +280,16 @@ li i{
     border-radius: 5px;
     filter: drop-shadow(7px 10px 4px rgba(0, 0, 0, 0.25));
   }
-
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track{
+    background-color: #e5e5e5;
+}  
+::-webkit-scrollbar-thumb{
+   background-color: #FDBB3A;
+   border-radius: 15px;
+}
   @media screen and (max-width: 1024px) {
     .m1{
         opacity: 0;
@@ -289,10 +301,10 @@ li i{
         width: 100%;
     }
     .ensemble-fleche{
-        width: 445px;
+        width: 540px;
     }
     .ensemble-fleche2{
-        width: 445px;
+        width: 550px;
     }
     .inputeR{width: 50%; } .btnR{width: 20%; }
 }

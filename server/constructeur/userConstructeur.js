@@ -30,6 +30,8 @@ const create=async(req, res)=>{
     const token = createToken(doc._id, doc.nom, doc.isAdmin)
     return res.status(201).json({
         message: "User created successfully",
+        id:doc._id,
+        adamin:doc.isAdmin,
         token
      })
 }
@@ -52,7 +54,7 @@ const connextion= async(req, res)=>{
 
         const token = createToken(doc._id, doc.nom, doc.isAdmin)
         return res.status(200).json({
-            nom:doc.nom, 
+            id:doc._id, 
             token,
         })
      })
@@ -61,7 +63,7 @@ const connextion= async(req, res)=>{
 function affiche(req, res){
     const id = req.params.id
  moduel.findById(id).populate([
-    {path:'produits', select:['TypeDeCategorie','description', 'prix']}, 
+    {path:'produits', select:['TypeDeCategorie','description', 'prix', 'photoProduit']}, 
     {path:"discution", select :["distinataire","message"]}, 
     {path:"panier", select :["ProduitsCommander"]}
 ])
@@ -70,10 +72,16 @@ function affiche(req, res){
    })
    .catch((err)=>console.error("error c:"+err))
 }
-
+function affiches(req, res){
+ moduel.find()
+ .then((doc)=>{
+    res.send(doc)
+   })
+   .catch((err)=>console.error("error c:"+err))
+}
 //Modiff
 function modif(req, res){
-    const {nom , prenom, bio, photo,entreprise}=req.body;
+    const {nom , prenom, bio, photo, entreprise, categories,tel,lieu}=req.body;
     nom?
     moduel.updateOne({"_id":req.params.id}, {nom:nom}
     ,{new:true, runValidators:true})
@@ -108,7 +116,7 @@ function modif(req, res){
     
     //Photo
     photo?
-    moduel.updateOne({"_id":req.params.id}, {photo:Avatra(photo)}
+    moduel.updateOne({"_id":req.params.id}, {photo:photo}
     ,{new:true, runValidators:true})
     .then((doc)=>{
         res.send(doc)
@@ -127,6 +135,36 @@ function modif(req, res){
      })
      .catch((err)=>console.error("error c5:"+err))
      :null
+      //nomEntreprise
+      categories?
+      moduel.updateOne({"_id":req.params.id}, {categories:categories}
+      ,{new:true, runValidators:true})
+      .then((doc)=>{
+          res.send(doc)
+          console.log("supp6");
+      })
+      .catch((err)=>console.error("error c6:"+err))
+      :null
+      //tel
+      tel?
+      moduel.updateOne({"_id":req.params.id}, {tel:tel}
+      ,{new:true, runValidators:true})
+      .then((doc)=>{
+          res.send(doc)
+          console.log("supp7");
+      })
+      .catch((err)=>console.error("error c7:"+err))
+      :null
+     //lieu
+     lieu?
+      moduel.updateOne({"_id":req.params.id}, {lieu:lieu}
+      ,{new:true, runValidators:true})
+      .then((doc)=>{
+          res.send(doc)
+          console.log("supp7");
+      })
+      .catch((err)=>console.error("error c7:"+err))
+      :null
 }
 function suppProduit(req, res){
     moduel.updateOne({"_id":req.params.id}, {$pull : {produits : req.body.id}},{new:true, runValidators:true})
@@ -141,4 +179,4 @@ function suppProduit(req, res){
 }
 
 
-module.exports ={createUser:create, afficheUser:affiche, modifUser:modif, suppProduitUser:suppProduit, conn:connextion}
+module.exports ={createUser:create, afficheUser:affiche, modifUser:modif, suppProduitUser:suppProduit, conn:connextion, affiches:affiches}

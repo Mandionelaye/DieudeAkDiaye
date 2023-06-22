@@ -1,0 +1,30 @@
+.paramProfil{
+    width: 50%;
+    padding: 10px;
+}
+.sousProfilBlock{
+    width: 400px;
+        background:#FFFFFF;
+    border-radius: 20px; 
+    filter: drop-shadow(7px 10px 4px rgba(0, 0, 0, 0.25)); 
+}
+.listes{
+    text-decoration: none;
+}
+.profilUse p{
+    padding: 0 10px;
+    font-family: 'Arial';
+ font-style: normal;
+ font-weight: 400;
+ }
+ .profilUse{
+     margin-bottom: 5px;
+     background:#FFFFFF;
+     border-radius: 20px; 
+ }
+@media screen and (max-width:1024px) {
+    .sousProfilBlock{
+        width: 215%;
+        margin: auto !important;
+    }
+}

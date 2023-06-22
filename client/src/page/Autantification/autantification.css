@@ -3,8 +3,9 @@ background: linear-gradient(180deg, #FFA800 49.48%, rgba(217, 217, 217, 0) 99.99
 border-radius: 55px;
 margin: auto !important;
 height: 80vh;
-max-height: 100%;
-width: 80%;
+min-height: 50vh;
+width: 100%;
+max-width:80%;
 text-align: center;
 }
 .containeA p{
@@ -13,6 +14,9 @@ text-align: center;
     color: #ffff;
     font-family: 'Arial';
     font-style: normal;
+}
+.cursor{
+    cursor: pointer;
 }
 .containeA h2{
     text-align: center;

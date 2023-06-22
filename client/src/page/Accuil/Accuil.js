@@ -2,16 +2,22 @@ import React, { useRef } from 'react'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import './accuil.css'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import 'bootstrap/dist/js/bootstrap.min.js'
 import Role from './ROLE/Role';
 import CadreProduits from './cadreProduits/cadreProduits';
 import Footer from './footer/Footer';
 export default function Accuil() {
+  const {id}=useParams();
   const images =[
     '/image/1.jpg',
     '/image/3.jpg',
     '/image/5.jpg',
+    "/image/motre.jpg",
+    "/image/airforce_.jpg",
+    "/image/tablette.webp",
+    "/image/lunette.jpg",
+    "/image/casque.jpg",
   ]
   const images1 =[
     '/image/4.webp',
@@ -51,8 +57,8 @@ export default function Accuil() {
     },
     {
       id:6,
-      name:'Informatique',
-       icone:"fa-solid fa-laptop"
+      name:'alimentation générale',
+       icone:"fa-solid fa-pizza-slice"
     },
     {
       id:7,
@@ -73,63 +79,144 @@ export default function Accuil() {
 const produits = [
   {
     id:1,
-    name:'SPORT',
-    img:"/image/sport.jpg"
+    name:'Haltere',
+    img:"/image/sport.jpg",
+    category:"sport"
   },
   {
     id:2,
-    name:"ANIMAUX",
-     img:"/image/animaux.jpg"
+    name:"Mouton",
+     img:"/image/animaux.jpg",
+     category:"animaux"
   },
   {
     id:3,
-    name:'PHONE',
-     img:"/image/iphone.jpeg"
+    name:'Iphone 14',
+     img:"/image/iphone.jpeg",
+     category:"electronique"
   },
   {
     id:4,
-    name:'TV',
-     img:"/image/tv.webp"
+    name:'Televisieur',
+     img:"/image/tv.webp",
+     category:"electronique"
   },
   {
     id:5,
-    name:'BEAUTE',
-     img:"/image/beaute.jpg"
+    name:'Matériel de cheveux',
+     img:"/image/beaute.jpg",
+     category:"sante & beaute"
   },
   {
     id:6,
-    name:'MODE',
-     img:"/image/robe.jpg"
+    name:'Robe',
+     img:"/image/robe.jpg",
+     category:"mode"
   },
   {
     id:7,
-    name:'REFIGERATEUR',
-     img:"/image/frigo.jpg"
+    name:'Refigerateur',
+     img:"/image/frigo.jpg",
+     category:"electromenager"
   },
   {
     id:8,
-    name:'VOITURE',
-     img:"/image/voiture.jpg"
+    name:'Voitur',
+     img:"/image/voiture.jpg",
+     category:"vehicule"
+     
   },
   {
     id:9,
-    name:'TABLETTE',
-    img:"/image/tablette.jpg"
+    name:'Tablette',
+    img:"/image/tablette.jpg",
+    category:"electronique"
   },
   {
     id:10,
-    name:'SHOES',
-     img:"/image/shoes.jpg"
+    name:'Shoes',
+     img:"/image/shoes.jpg",
+     category:"mode"
   },
   {
     id:11,
-    name:'IMFORMATIQUE',
-     img:"/image/mac.jpg"
+    name:'Macbook pro',
+     img:"/image/mac.jpg",
+     category:"electronique"
   },
   {
     id:12,
-    name:'SAC',
-     img:"/image/sac.jpg"
+    name:'Sac',
+     img:"/image/sac.jpg",
+     category:"mode"
+  },
+]
+const produits2=[
+  {
+    id:1,
+    name:'Cuisiniere',
+    img:"/image/cuisiniere.jpeg",
+    category:"electromenager"
+  },
+  {
+    id:2,
+    name:'Ecouteur',
+    img:"/image/ecouteur.jpg",
+    category:"electronique"
+  },
+  {
+    id:3,
+    name:'Ensemble Jean',
+    img:"/image/ensembleJean.jpg",
+    category:"mode"
+  },
+  {
+    id:4,
+    name:'Haltere',
+    img:"/image/aleter2.jpg",
+    category:"sport"
+  },
+  {
+    id:5,
+    name:'Jus',
+    img:"/image/juse-fuit.png",
+    category:"alimentation générale"
+  },
+  {
+    id:6,
+    name:'Pigeons',
+    img:"/image/pigeons.jpeg",
+    category:"animaux"
+  },
+  {
+    id:7,
+    name:'Play 5',
+    img:"/image/play4.jpg",
+    category:"jeux videos & consoles"
+  },
+  {
+    id:8,
+    name:'Poussete',
+    img:"/image/poussete.jpg",
+    category:"pour enfant"
+  },
+  {
+    id:9,
+    name:'volant Ps4',
+    img:"/image/volantPs4.jpg",
+    category:"jeux videos & consoles"
+  },
+  {
+    id:10,
+    name:'Lactel',
+    img:"/image/lactel.jpg",
+    category:"alimentation générale"
+  },
+  {
+    id:11,
+    name:'trotteur',
+    img:"/image/trotteur.webp",
+    category:"pour enfant"
   },
 ]
 const carosel1 =useRef(null);
@@ -161,7 +248,7 @@ const back2=(e)=>{
             <p className='dd'>Diaye Ak Dieude</p>
           </Link>
           <div className="d-flex navi">
-          <Link to={'/'} className='home p-2'><i className="fa-solid fa-house"></i></Link>
+          <Link to={ !id?'/':'/2D/'+id} className='home p-2'><i className="fa-solid fa-house"></i></Link>
           <Link to={"/connecter"} className='conn p-2'>se connecter</Link>
           <Link to={"/inscrition"} className='ins p-2'>s'inscrire</Link>
           </div>
@@ -220,42 +307,46 @@ const back2=(e)=>{
          </div>
          <div className="carosele">  
       <div className="ensemble-fleche">
-          <button type="button" className="btne" onClick={next}>
+          <button type="button" className="btne px-2" onClick={next}>
            <i className="fa-solid fa-less-than"></i>
            </button>
           <div className="slidep" ref={carosel1}>
           { produits.map((produit)=>(
+            <Link to={id?`/2D/filter/${id}/${produit.category}`:`/connecter/filter/${produit.category}`} className='categorieProd'>
              <div className="cardimg" key={produit.id}>
               <img src={produit.img} alt="img" className="imge1"/>
               <p>{produit.name}</p>
               </div>
+              </Link>
               ))
               }
            </div>  
-          <button type="button" class="btne" onClick={back}>
+          <button type="button" class="btne px-2" onClick={back}>
            <i className="fa-solid fa-greater-than"></i>
            </button>
           </div>
           <div className="ensemble-fleche2">
-          <button type="button" className="btne" onClick={next2}>
+          <button type="button" className="btne px-2" onClick={next2}>
            <i className="fa-solid fa-less-than"></i>
            </button>
           <div className="slidep2" ref={carosel2}>
-          { produits.reverse().map((produit)=>(
+          { produits2.map((produit)=>(
+            <Link to={id?`/2D/filter/${id}/${produit.category}`:`/connecter/filter/${produit.category}`} className='categorieProd'>
              <div className="cardimg" key={produit.id}>
               <img src={produit.img} alt="img" className="imge1"/>
               <p>{produit.name}</p>
               </div>
+              </Link>
               ))
               }
            </div>  
-          <button type="button" className="btne" onClick={back2}>
+          <button type="button" className="btne px-2" onClick={back2}>
            <i className="fa-solid fa-greater-than"></i>
            </button>
          </div>
          </div>
          <Role/>
-         <CadreProduits/>
+         <CadreProduits id={id}/>
          <Footer/>
     </div> 
     </>
